@@ -1,0 +1,37 @@
+version: '3.9'
+
+services:
+  db:
+    image: postgres:13  # Usa a versão correta do PostgreSQL
+    container_name: meu_postgres
+    environment:
+      POSTGRES_DB: noticias_db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: Cami1703@
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    networks:
+      - minha_rede
+
+  python-app:
+    build: .
+    container_name: meu_scraper
+    depends_on:
+      - localhost
+    environment:
+      DATABASE_HOST: meu_postgres  # Nome do serviço do banco
+      DATABASE_PORT: 5432
+      DATABASE_NAME: noticias_db
+      DATABASE_USER: postgres
+      DATABASE_PASSWORD: Cami1703@
+    networks:
+      - minha_rede
+
+volumes:
+  postgres-data:
+
+networks:
+  minha_rede:
+    driver: bridge

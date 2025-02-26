@@ -2,7 +2,7 @@ version: '3.9'
 
 services:
   db:
-    image: postgres:13  # Usa a versão correta do PostgreSQL
+    image: postgres:13 
     container_name: meu_postgres
     environment:
       POSTGRES_DB: noticias_db
@@ -21,7 +21,7 @@ services:
     depends_on:
       - localhost
     environment:
-      DATABASE_HOST: meu_postgres  # Nome do serviço do banco
+      DATABASE_HOST: meu_postgres 
       DATABASE_PORT: 5432
       DATABASE_NAME: noticias_db
       DATABASE_USER: postgres
